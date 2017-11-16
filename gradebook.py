@@ -1,0 +1,100 @@
+from enrollment import Enrollment
+from student import Student
+from course import Course
+
+class Gradebook:
+    def __init__(self):
+        self.students = {}
+
+        #add to student dictionary
+        s = Student(1, "Carson", "Alexande#r", "09012005")
+        self.students[s.student_id] = s
+        s = Student(2, "Meredith", "Alonso", "09022002")
+        self.students[s.student_id] = s
+        s = Student(3, "Arturo", "Anand", "09032003")
+        self.students[s.student_id] = s
+        s = Student(4, "Gytis", "Barzdukas", "09012001")
+        self.students[s.student_id] = s
+        s = Student(5, "Peggy", "Justice", "09012001")
+        self.students[s.student_id] = s
+        s = Student(6, "Laura", "Norman", "09012003")
+        self.students[s.student_id] = s
+        s = Student(7, "Nino", "Olivetto", "09012005")
+        self.students[s.student_id] = s
+        s = Student(8, "John", "Doe", "12345678")
+        self.students[s.student_id] = s
+
+
+        self.courses = {}
+
+        #add to course dictionary
+        c = Course(1050, "Chemistry", 3)
+        self.courses[c.course_id] = c
+        c = Course(4022, "Microeconomics", 3)
+        self.courses[c.course_id] = c
+        c = Course(4041, "Macroeconomics", 3)
+        self.courses[c.course_id] = c
+        c = Course(1045, "Calculus", 4)
+        self.courses[c.course_id] = c
+        c = Course(3141, "Trigonometry", 4)
+        self.courses[c.course_id] = c
+        c = Course(2021, "Composition", 3)
+        self.courses[c.course_id] = c
+        c = Course(2042, "Literature", 4)
+        self.courses[c.course_id] = c
+
+
+        self.enrollments = {}
+
+        #add enrolled students into courses
+        enroll_id = 11050 #combine student id + chemistry id
+        enrollment = Enrollment(enroll_id, self.students[1], self.courses[1050], "A")
+        self.enrollments[enroll_id] = enrollment
+
+        enroll_id = 14022 #combine student id + chemistry id
+        enrollment = Enrollment(enroll_id, self.students[1], self.courses[4022], "B")
+        self.enrollments[enroll_id] = enrollment
+
+        enroll_id = 14041 #combine student id + chemistry id
+        enrollment = Enrollment(enroll_id, self.students[1], self.courses[4041], "A")
+        self.enrollments[enroll_id] = enrollment
+
+        enroll_id = 21045 #combine student id + chemistry id
+        enrollment = Enrollment(enroll_id, self.students[2], self.courses[1045], "B")
+        self.enrollments[enroll_id] = enrollment
+
+        enroll_id = 23141 #combine student id + chemistry id
+        enrollment = Enrollment(enroll_id, self.students[2], self.courses[3141], "C")
+        self.enrollments[enroll_id] = enrollment
+
+        enroll_id = 22021 #combine student id + chemistry id
+        enrollment = Enrollment(enroll_id, self.students[2], self.courses[4041], "A")
+        self.enrollments[enroll_id] = enrollment
+
+        enroll_id = 31050 #combine student id + chemistry id
+        enrollment = Enrollment(enroll_id, self.students[3], self.courses[1050], "F")
+        self.enrollments[enroll_id] = enrollment
+
+        enroll_id = 41050 #combine student id + chemistry id
+        enrollment = Enrollment(enroll_id, self.students[4], self.courses[1050], "B")
+        self.enrollments[enroll_id] = enrollment
+
+        enroll_id = 44022 #combine student id + chemistry id
+        enrollment = Enrollment(enroll_id, self.students[4], self.courses[4022], "A")
+        self.enrollments[enroll_id] = enrollment
+
+        enroll_id = 54041 #combine student id + chemistry id
+        enrollment = Enrollment(enroll_id, self.students[5], self.courses[2021], "C")
+        self.enrollments[enroll_id] = enrollment
+
+        enroll_id = 61045 #combine student id + chemistry id
+        enrollment = Enrollment(enroll_id, self.students[6], self.courses[1045], "B")
+        self.enrollments[enroll_id] = enrollment
+
+        enroll_id = 73141 #combine student id + chemistry id
+        enrollment = Enrollment(enroll_id, self.students[7], self.courses[3141], "A")
+        self.enrollments[enroll_id] = enrollment
+
+        enroll_id = 83141 #combine student id + chemistry id
+        enrollment = Enrollment(enroll_id, self.students[8], self.courses[3141], "E")
+        self.enrollments[enroll_id] = enrollment
