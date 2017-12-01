@@ -1,61 +1,67 @@
-from transcript import Transcript
-from school_initializer import SchoolInitializer
-from school_db import SchoolDB
+from model.transcript import Transcript
+from data.school_db import SchoolDB
+from data.school_initializer import SchoolInitializer
 
 class Gradebook:
 
-
     def __init__(self, school_db):
+
         self.school_db = school_db
         self.enrollments = school_db.enrollments
         self.students = school_db.school_initializer.students
 
     def main(self):
-        keep_going = 'y'
 
-        while keep_going == 'y':
-            print("Available Enroll IDs: ")
-            for enrollment in self.enrollments.values():
-                print(enrollment.enroll_id)
+        choice = ''
 
-            enroll_key = int(input("\nEnter enroll key: "))
+        while choice != 'e':
+            print()
+            choice = self.__display_menu()
 
-            if enroll_key in self.enrollments:
-                enroll = self.enrollments.get(enroll_key)
+            if choice == '1':
 
-                grade = input("Enter grade: ")
-                enroll.grade = grade
+                enroll_key = int(input("Enter enroll key"))
 
-            else:
-                print("Key doesn't exist")
+                if enroll_key in self.enrollments:
+                    enroll = self.enrollments.get(enroll_key)
 
-            keep_going = input("Enter y to continue...")
+                    grade = input("Enter grade: ")
+                    enroll.grade = grade
 
-        for enrollment in self.enrollments.values():
-            enrollment.print_record()
+                else:
+                    print("Key doesn't exist")
 
-        print("\nAvailable Student IDs: ")
-        for student in self.students.values():
-            print(student.student_id)
+            elif choice == '2':
 
-        ask_student = 'y'
+                student_id = int(input("Enter student id: "))
 
-        while ask_student == 'y':
-            student_id = int(input("\nEnter student id: "))
-            student = self.students[student_id]
-            transcript = Transcript(self.enrollments)
-            transcript.print_transcript(student)
+                if student_id in self.students:
+                    transcript = Transcript(self.enrollments)
+                    student = self.students.get(student_id)
+                    transcript.print_transcript(student)
 
-            ask_student = input("\nEnter y to search for another student: ")
+            elif choice == '3':
 
-        ask_print_all = input("\nWould you like to print all student transcripts? (y/n): ")
-        if ask_print_all == 'y':
-            transcript.print_all_transcripts(self.students)
+                for enrollment in self.enrollments.values():
+                    enrollment.print_record()
 
-        ask_print_all = input("\nWould you like to save enrollments? (y/n): ")
-        if ask_print_all == 'y':
-            self.school_db.save_data()
+            elif choice == '4':
 
-school_db = SchoolDB(SchoolInitializer())
-gradebook = Gradebook(school_db)
+                self.school_db.save_data()
+
+            print()
+
+    def __display_menu(self):
+
+        print("Academic Main Menu")
+        print()
+        print("1) Update Grade")
+        print("2) Print Student GPA")
+        print("3) Print All Enrollments")
+        print("4) Save Data")
+        print()
+        return input("Enter 1, 2, 3, or e to exit")
+
+db = SchoolDB(SchoolInitializer())
+gradebook = Gradebook(db)
 gradebook.main()

@@ -1,5 +1,3 @@
-from professor import Professor
-
 class Course:
 
     def __init__(self, course_id, title, credit_hour, professor):
@@ -8,5 +6,3 @@ class Course:
         self.title = title
         self.credit_hour = credit_hour
         self.professor = professor
-
-        
